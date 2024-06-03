@@ -21,6 +21,6 @@ jobs:
         docker push warehouseinventory.azurecr.io/warehouse:latest
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'warehousewebbapp'
+        app-name: 'warehousewebapp'
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
         images: 'warehouse:latest'
