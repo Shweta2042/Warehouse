@@ -12,15 +12,15 @@ jobs:
 
     - uses: azure/docker-login@v1
       with:
-        login-server: warehouseregistryshweta.azurecr.io
+        login-server: warehouseinventory.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . -t warehouseregistryshweta.azurecr.io/warehouse:latest
-        docker push warehouseregistryshweta.azurecr.io/warehouse:latest
+        docker build . -t warehouseinventory.azurecr.io/warehouse:latest
+        docker push warehouseinventory.azurecr.io/warehouse:latest
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'warehousewebbapp'
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-        images: 'warehouseregistryshweta.azurecr.io/warehouse:latest'
+        images: 'warehouse:latest'
