@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/app.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "mocha --timeout 5000"
   },
   "keywords": [],
   "author": "",
@@ -25,8 +26,12 @@
     "winston": "^3.13.0"
   },
   "devDependencies": {
+    "chai": "^5.1.1",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.5"
+    "lint-staged": "^15.2.5",
+    "mocha": "^10.4.0",
+    "sinon": "^18.0.0",
+    "supertest": "^7.0.0"
   },
   "lint-staged": {
     "*.js": "eslint"

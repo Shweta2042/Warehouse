@@ -6,7 +6,7 @@ const cors = require('cors'); // Import cors
 const mainRouter = require('./routes/main');
 
 const app = express();
-const port = 8005;
+const port = 3000;
 
 
 app.set('view engine', 'ejs');

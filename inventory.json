@@ -1,0 +1,27 @@
+ [
+      {
+        "art_id": 1,
+        "name": "leg",
+        "stock": 80
+      },
+      {
+        "art_id": 2,
+        "name": "screw",
+        "stock": 100
+      },
+      {
+        "art_id": 3,
+        "name": "seat",
+        "stock": 30
+      },
+      {
+        "art_id": 4,
+        "name": "table top",
+        "stock": 20
+      },
+      {
+        "art_id": 5,
+        "name": "table back",
+        "stock": 20
+      }
+]
