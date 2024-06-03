@@ -1,0 +1,26 @@
+on: [push]
+
+name: Warehouse_Container
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout the repo
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: warehouseregistryshweta.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - run: |
+        docker build . -t warehouseregistryshweta.azurecr.io/warehouse:latest
+        docker push warehouseregistryshweta.azurecr.io/warehouse:latest
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'warehousewebbapp'
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        images: 'warehouseregistryshweta.azurecr.io/warehouse:latest'
