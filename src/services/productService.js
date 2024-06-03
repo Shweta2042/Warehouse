@@ -4,10 +4,10 @@ const helper = require('../utils/helper');
 const { getProductsFromRedis, deleteProductsFromRedis } = require('../utils/redisFunction');
 const redisClient = require('../utils/redisClient');
 
-const uri = "mongodb://inventoryandproductdb:J9k2hyN0xWh6L1WJ4REtbTCV8VeYij5VTpMyCqpWUXfbvxh2gJtQNjHxKmNC7qOtgpvmP575AWj1ACDbduCrTA==@inventoryandproductdb.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@inventoryandproductdb@";
-const dbName = "inventory";
-const productsCollectionName = "products";
-const inventoryCollectionName = "articles";
+const uri = process.env.URI;
+const dbName = process.env.DB_NAME;
+const productsCollectionName = process.env.productCollectionName;
+const inventoryCollectionName = process.env.inventoryCollectionName;
 
 const options = {
     maxPoolSize: 50, 
