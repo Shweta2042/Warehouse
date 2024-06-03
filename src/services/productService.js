@@ -1,8 +1,6 @@
 const { MongoClient, ObjectId } = require('mongodb');
 const fs = require('fs');
 const helper = require('../utils/helper');
-const { getProductsFromRedis, deleteProductsFromRedis } = require('../utils/redisFunction');
-const redisClient = require('../utils/redisClient');
 
 const uri = process.env.URI;
 const dbName = process.env.DB_NAME;
@@ -34,7 +32,6 @@ async function getProducts() {
     if (!database) await connectToDatabase();
     const collection = database.collection(productsCollectionName);
     const products = await collection.find({}).toArray();
-    // await redisClient.set(cacheKey, JSON.stringify(products));
     return products;
 }
 
@@ -58,7 +55,6 @@ async function handleFileUploadAndDBConnection(filePath) {
 }
 
 async function uploadProducts(filePath, database) {
-    await deleteProductsFromRedis();
     const fileContents = fs.readFileSync(filePath, 'utf8');
     const products = JSON.parse(fileContents);
     const productCollection = database.collection(productsCollectionName);
