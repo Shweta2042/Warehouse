@@ -4,10 +4,10 @@ const helper = require('../utils/helper');
 const { getProductsFromRedis, deleteProductsFromRedis } = require('../utils/redisFunction');
 const redisClient = require('../utils/redisClient');
 
-const uri = process.env.URI;
-const dbName = process.env.DB_NAME;
-const productsCollectionName = process.env.productCollectionName;
-const inventoryCollectionName = process.env.inventoryCollectionName;
+const uri = "mongodb://inventoryandproductdb:J9k2hyN0xWh6L1WJ4REtbTCV8VeYij5VTpMyCqpWUXfbvxh2gJtQNjHxKmNC7qOtgpvmP575AWj1ACDbduCrTA==@inventoryandproductdb.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@inventoryandproductdb@";
+const dbName = "inventory";
+const productsCollectionName = "products";
+const inventoryCollectionName = "articles";
 
 const options = {
     maxPoolSize: 50, 
@@ -32,18 +32,9 @@ async function connectToDatabase() {
 
 async function getProducts() {
     if (!database) await connectToDatabase();
-    const cacheKey = 'products';
-
-    const cachedProducts = await redisClient.get(cacheKey);
-    if (cachedProducts) {
-        return JSON.parse(cachedProducts);
-    }
-
     const collection = database.collection(productsCollectionName);
     const products = await collection.find({}).toArray();
-
-    await redisClient.set(cacheKey, JSON.stringify(products));
-
+    // await redisClient.set(cacheKey, JSON.stringify(products));
     return products;
 }
 
