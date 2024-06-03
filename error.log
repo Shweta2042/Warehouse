@@ -1,0 +1,3 @@
+2024-06-03T12:06:39.067Z [31merror[39m: Error selling product: Not enough stock for article ID 1
+2024-06-03T14:02:12.781Z [31merror[39m: Error selling product: Unable to process the sale of the specified product and update the database accordingly.: Not enough stock for article ID 1
+2024-06-03T14:41:43.123Z [31merror[39m: Error fetching products: Unable to retrieve the list of products from the database.: redisClient is not defined

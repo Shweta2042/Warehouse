@@ -1,0 +1,12 @@
+{
+    "serverId": "your-server-id",
+    "projectKey": "your-project-key",
+    "rules": {
+        "javascript:S125": {
+            "level": "off"
+        },
+        "javascript:S1192": {
+            "level": "error"
+        }
+    }
+}

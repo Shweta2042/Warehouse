@@ -1,0 +1,83 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Product Management</h1>
+
+    <div class="tabs">
+        <button class="tablinks" onclick="openTab(event, 'Products')">View Products</button>
+        <button class="tablinks" onclick="openTab(event, 'Upload')">Upload</button>
+    </div>
+
+    <div id="Products" class="tabcontent">
+        <h2>Products</h2>
+        <div id="productsList" class="products-container">
+            <!-- Products will be loaded here -->
+        </div>
+    </div>
+
+    <div id="Upload" class="tabcontent">
+        <h2>Upload</h2>
+        <section>
+            <h3>Upload Products</h3>
+            <form action="/upload-products" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Upload Products</button>
+            </form>
+        </section>
+
+        <section>
+            <h3>Upload Articles</h3>
+            <form action="/upload-articles" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <button type="submit">Upload Articles</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            openTab(event, 'Products'); 
+            console.log("i am hererrerer");
+            fetch('/products')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                    const productsList = document.getElementById('productsList');
+                    productsList.innerHTML = data.map(product => `
+                    <div class="product">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div>${product.name}</div>
+                        <div>Price: $${product.price}</div>
+                        <a href="/product/${product.name}">View Details</a>
+                    </div>
+                    `).join('');
+                })
+                .catch(error => {
+        console.error('Error fetching products:', error);
+    });
+        });
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>

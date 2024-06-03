@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="/css/product-details.css">
+</head>
+<body>
+    <div class="product-details-container">
+        <div> 
+            <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
+        </div>
+        <div>
+        <div><%= product.name %></div>
+        <div>Price: $<%= product.price %></div>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+        <div class="articles">
+            <% product.contain_articles.forEach(article => { %>
+                <div class="article" id="article-<%= article.art_id %>">
+                    <div>Article ID: <%= article.art_id %></div>
+                    <div class="amount" id="amount-<%= article.art_id %>">Amount: <%= article.amount_of %></div>
+                </div>
+            <% }); %>
+        </div>
+        <div id="error-message" class="error-message"></div>
+        <button id="sell-button">Sell</button>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const product = <%- JSON.stringify(product) %>;
+            console.log(product, typeof (product.contain_articles), "inproeduct")
+            const articles = product.contain_articles;
+            for (const article of articles) {
+                const response = await fetch(`/article/${article.art_id}`);
+                const data = await response.json();
+                
+                const articleElement = document.getElementById(`article-${article.art_id}`);
+                if (data && data.name && data.stock) {
+                    const nameDiv = document.createElement('div');
+                    nameDiv.textContent = `Name: ${data.name}`;
+                    articleElement.appendChild(nameDiv);
+
+                    const stockDiv = document.createElement('div');
+                    stockDiv.textContent = `Stock: ${data.stock}`;
+                    articleElement.appendChild(stockDiv);
+
+                    if (parseInt(data.stock) < parseInt(article.amount_of)) {
+                        document.getElementById('error-message').textContent = `Not enough stock for article ID ${article.art_id}`;
+                    }
+                }
+            }
+
+            const quantityInput = document.getElementById('quantity');
+            quantityInput.addEventListener('input', () => {
+                const quantity = parseInt(quantityInput.value);
+                articles.forEach(article => {
+                    const amountDiv = document.getElementById(`amount-${article.art_id}`);
+                    amountDiv.textContent = `Amount: ${article.amount_of * quantity}`;
+                });
+            });
+
+            const sellButton = document.getElementById('sell-button');
+            sellButton.addEventListener('click', async () => {
+                const quantity = parseInt(quantityInput.value);
+                const updatedArticles = articles.map(article => ({
+                    art_id: article.art_id,
+                    amount_of: article.amount_of * quantity
+                }));
+
+                const response = await fetch('/sell-product', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        productName: '<%= product.name %>',
+                        quantity: quantity,
+                        id: '<%= product._id %>',
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Product sold successfully!');
+                } else {
+                    document.getElementById('error-message').textContent = result.message || 'Error selling product';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

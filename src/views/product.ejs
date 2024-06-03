@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="../../public/css/styles.css">
+</head>
+<body>
+    <div class="products">
+        <% products.forEach(function(product) { %>
+            <div class="product">
+                <h2><%= product.name %></h2>
+                <p><strong>Price:</strong> $<%= product.price %></p>
+                <p><%= product.description %></p>
+                <form action="/sell-product" method="post">
+                    <input type="hidden" name="id" value="<%= product._id %>">
+                    <input type="hidden" name="productName" value="<%= product.name %>">
+                    <label for="quantity-<%= product._id %>">Quantity:</label>
+                    <input type="number" id="quantity-<%= product._id %>" name="quantity" min="1" value="1" required>
+                    <button type="submit">Buy Now</button>
+                </form>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html>
+

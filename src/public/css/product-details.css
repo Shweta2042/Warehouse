@@ -1,0 +1,38 @@
+.product-details-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+}
+.product-image {
+    width: 100%;
+    transition: transform 0.3s;
+}
+.product-image:hover {
+    transform: scale(1.1);
+}
+.articles {
+    margin-top: 20px;
+}
+.article {
+    margin-bottom: 10px;
+}
+.error-message {
+    color: red;
+    margin-top: 20px;
+}
