@@ -45,7 +45,7 @@ async function getProductById(productName) {
 async function getArticleById(artId) {
     if (!database) await connectToDatabase();
     const collection = database.collection(inventoryCollectionName);
-    const article = await collection.findOne({ art_id: artId });
+    const article = await collection.findOne({ art_id: parseInt(artId) });
     return article;
 }
 

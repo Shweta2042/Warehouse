@@ -40,42 +40,12 @@ h1 {
     display: none;
 }
 
-/* form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-input[type="file"],
-input[type="number"] {
-    margin-bottom: 10px;
-    padding: 5px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #218838;
-} */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
-}
-
+/* Styles for Product List */
 #productsList {
     display: flex;
     flex-wrap: wrap; 
     gap: 40px 40px;
+    margin-top: 100px;
 }
 
 .product {
@@ -96,7 +66,6 @@ body {
     height: 200px;
 }
 
-
 .product a {
     display: inline-block;
     padding: 5px 10px;
@@ -110,3 +79,84 @@ body {
     background-color: #0056b3;
 }
 
+/* Styles for Upload Section */
+#Upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#Upload section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+}
+
+#Upload section h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+#Upload form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#Upload label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+#Upload input[type="file"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    width: 100%;
+}
+
+#Upload button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#Upload button:hover {
+    background-color: #218838;
+}
+
+.upload-name {
+    display: flex;
+    gap: 40px;
+}
+
+.header1 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: .15px;
+}
+
+.header2 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: .15px;
+}
+
+.header3 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: .15px;
+}

@@ -7,49 +7,59 @@
     <link rel="stylesheet" href="/css/product-details.css">
 </head>
 <body>
-    <div class="product-details-container">
-        <div> 
+    <nav>
+        <a href="/" class="home-button">Home</a>
+    </nav>
+    <main class="product-details-container" role="main">
+        <section>
             <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
-        </div>
-        <div>
-        <div><%= product.name %></div>
-        <div>Price: $<%= product.price %></div>
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
-        <div class="articles">
-            <% product.contain_articles.forEach(article => { %>
-                <div class="article" id="article-<%= article.art_id %>">
-                    <div>Article ID: <%= article.art_id %></div>
-                    <div class="amount" id="amount-<%= article.art_id %>">Amount: <%= article.amount_of %></div>
+        </section>
+        <section>
+            <div class="header1"><%= product.name %></div>
+            <div class="header2">Price: $<%= product.price %></div>
+            <form id="sell-form">
+                <div>
+                    <label class="header2" for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
                 </div>
-            <% }); %>
-        </div>
-        <div id="error-message" class="error-message"></div>
-        <button id="sell-button">Sell</button>
-    </div>
-    </div>
+                <fieldset>
+                    <legend>Articles</legend>
+                    <ul class="articles">
+                        <% product.contain_articles.forEach(article => { %>
+                            <li class="article" id="article-<%= article.art_id %>">
+                                <span class="article-name"></span>
+                                <span class="article-stock"></span>
+                                <span class="amount" id="amount-<%= article.art_id %>">Amount: <%= article.amount_of %></span>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </fieldset>
+                <div id="error-message" class="error-message" role="alert" aria-live="assertive"></div>
+                <button type="button" id="sell-button">Sell</button>
+            </form>
+        </section>
+    </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const product = <%- JSON.stringify(product) %>;
-            console.log(product, typeof (product.contain_articles), "inproeduct")
             const articles = product.contain_articles;
+            const articleStock = {};
+
             for (const article of articles) {
                 const response = await fetch(`/article/${article.art_id}`);
                 const data = await response.json();
-                
                 const articleElement = document.getElementById(`article-${article.art_id}`);
                 if (data && data.name && data.stock) {
-                    const nameDiv = document.createElement('div');
-                    nameDiv.textContent = `Name: ${data.name}`;
-                    articleElement.appendChild(nameDiv);
+                    articleStock[article.art_id] = { stock: parseInt(data.stock), name: data.name };
+                    const nameSpan = articleElement.querySelector('.article-name');
+                    nameSpan.textContent = `Name: ${data.name}`;
 
-                    const stockDiv = document.createElement('div');
-                    stockDiv.textContent = `Stock: ${data.stock}`;
-                    articleElement.appendChild(stockDiv);
+                    const stockSpan = articleElement.querySelector('.article-stock');
+                    stockSpan.textContent = `Stock: ${data.stock}`;
 
                     if (parseInt(data.stock) < parseInt(article.amount_of)) {
-                        document.getElementById('error-message').textContent = `Not enough stock for article ID ${article.art_id}`;
+                        document.getElementById('error-message').textContent = `Not enough stock for article ${data.name}`;
                     }
                 }
             }
@@ -57,10 +67,16 @@
             const quantityInput = document.getElementById('quantity');
             quantityInput.addEventListener('input', () => {
                 const quantity = parseInt(quantityInput.value);
+                let errorMessage = '';
                 articles.forEach(article => {
-                    const amountDiv = document.getElementById(`amount-${article.art_id}`);
-                    amountDiv.textContent = `Amount: ${article.amount_of * quantity}`;
+                    const amountSpan = document.getElementById(`amount-${article.art_id}`);
+                    const totalAmount = article.amount_of * quantity;
+                    amountSpan.textContent = `Amount: ${totalAmount}`;
+                    if (totalAmount > articleStock[article.art_id].stock) {
+                        errorMessage = `Not enough stock for article ${articleStock[article.art_id].name}`;
+                    }
                 });
+                document.getElementById('error-message').textContent = errorMessage;
             });
 
             const sellButton = document.getElementById('sell-button');
