@@ -178,3 +178,19 @@ h1 {
     line-height: 1.5rem;
     letter-spacing: .15px;
 }
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    #productsList {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    .product {
+        width: 80%;
+    }
+
+    .upload-name{
+        flex-direction: column;
+    }
+}
