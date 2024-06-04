@@ -8,10 +8,11 @@ This warehouse software manages articles and products. Articles have an identifi
 2. Clone this repository.
 3. Navigate to the project directory: `cd warehouse`.
 4. Install dependencies: `npm install`.
+5. Run the command: `npm start`.
 
 ## MongoDB Connection
 1. Set up a MongoDB database (either locally or using a cloud service).
-2. Create an `.env` file in the project root with the following variables:
+2. Create a `.env` file in the project root with the following variables:
    - `MONGODB_URI`: The connection string for your MongoDB database.
    - Other environment variables as needed (e.g., secret keys, API keys).
 
