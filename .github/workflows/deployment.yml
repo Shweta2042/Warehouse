@@ -20,7 +20,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . -t --build-args ENV=$ENV warehouseinventory.azurecr.io/warehouse:latest
+        docker build --build-args ENV=$ENV . -t warehouseinventory.azurecr.io/warehouse:latest
         docker push warehouseinventory.azurecr.io/warehouse:latest
 
     - uses: azure/webapps-deploy@v2
