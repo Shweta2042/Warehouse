@@ -5,6 +5,12 @@ name: Warehouse_Container
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env: 
+     URI: '${{ secrets.URI }}'
+     DB_NAME: '${{ secrets.DB_NAME }}'
+     INVENTORYCOLLECTIONNAME: '${{ secrets.INVENTORYCOLLECTIONNAME }}'
+     PRODUCTCOLLECTIONNAME: '${{ secrets.PRODUCTCOLLECTIONNAME }}'
+
     steps:
     # checkout the repo
     - name: 'Checkout Github Action'
@@ -12,15 +18,16 @@ jobs:
 
     - uses: azure/docker-login@v1
       with:
-        login-server: warehouseinventory.azurecr.io
+        login-server: warehouseregistryshweta.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . -t warehouseinventory.azurecr.io/warehouse:latest
-        docker push warehouseinventory.azurecr.io/warehouse:latest
+        docker build . --build-arg URI=$URI DB_NAME=$DB_NAME productCollectionName=$productCollectionName inventoryCollectionName=$inventoryCollectionName -t warehouseregistryshweta.azurecr.io/warehouse:latest
+        docker push warehouseregistryshweta.azurecr.io/warehouse:latest
+
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'warehousewebapp'
+        app-name: 'warehousewebbapp'
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-        images: 'warehouseinventory.azurecr.io/warehouse:latest'
+        images: 'warehouseregistryshweta.azurecr.io/warehouse:latest'
