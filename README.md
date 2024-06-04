@@ -8,6 +8,7 @@ This warehouse software manages articles and products. Articles have an identifi
 2. Clone this repository.
 3. Navigate to the project directory: `cd warehouse`.
 4. Install dependencies: `npm install`.
+5. Run Command: `npm start`.
 
 ## MongoDB Connection
 1. Set up a MongoDB database (either locally or using a cloud service).
