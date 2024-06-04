@@ -5,8 +5,6 @@ name: Warehouse_Container
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env: 
-     ENV: ${{ vars.ENV }}
     
     steps:
     # checkout the repo
@@ -20,7 +18,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build --build-args ENV=$ENV . -t warehouseinventory.azurecr.io/warehouse:latest
+        docker . -t warehouseinventory.azurecr.io/warehouse:latest
         docker push warehouseinventory.azurecr.io/warehouse:latest
 
     - uses: azure/webapps-deploy@v2
