@@ -1,0 +1,9 @@
+/infra/.terraform
+/infra/env
+/infra/.terraform.lock.hcl
+/infra/terraform.tfstate
+/infra/terraform.tfstate.backup
+node_modules
+.env
+package-loack.json
+
