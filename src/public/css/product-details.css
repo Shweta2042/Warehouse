@@ -1,7 +1,18 @@
-/* CSS Styles */
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+    --header-color: #888;
+    --error-color: red;
+    --button-bg-color: #007bff;
+    --button-hover-bg-color: #0056b3;
+    --button-text-color: #fff;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
     margin: 0;
     padding: 20px;
 }
@@ -13,7 +24,7 @@ nav {
 .home-button {
     font-size: 18px;
     text-decoration: none;
-    color: #333;
+    color: var(--text-color);
 }
 
 .product-details-container {
@@ -54,6 +65,7 @@ input[type="number"] {
     font-size: 16px;
     padding: 5px;
     width: 100px;
+    border-radius: 8px; /* Rounded corners for input bar */
 }
 
 .articles {
@@ -63,6 +75,9 @@ input[type="number"] {
 
 .article {
     margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--header-color);
+    border-radius: 8px; /* Rounded corners for articles */
 }
 
 .article-name {
@@ -72,25 +87,25 @@ input[type="number"] {
 
 .article-stock {
     font-size: 14px;
-    color: #888;
+    color: var(--header-color);
 }
 
 .amount {
     font-size: 14px;
-    color: #333;
+    color: var(--text-color);
 }
 
 .error-message {
     font-size: 14px;
-    color: red;
+    color: var(--error-color);
     margin-top: 10px;
 }
 
 #sell-button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--button-bg-color);
     border: none;
-    color: #fff;
+    color: var(--button-text-color);
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
@@ -98,5 +113,5 @@ input[type="number"] {
 }
 
 #sell-button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg-color);
 }

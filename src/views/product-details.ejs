@@ -82,6 +82,20 @@
             const sellButton = document.getElementById('sell-button');
             sellButton.addEventListener('click', async () => {
                 const quantity = parseInt(quantityInput.value);
+                let canSell = true;
+
+                articles.forEach(article => {
+                    const totalAmount = article.amount_of * quantity;
+                    if (totalAmount > articleStock[article.art_id].stock) {
+                        canSell = false;
+                    }
+                });
+
+                if (!canSell) {
+                    document.getElementById('error-message').textContent = 'Not enough stock for one or more articles.';
+                    return;
+                }
+
                 const updatedArticles = articles.map(article => ({
                     art_id: article.art_id,
                     amount_of: article.amount_of * quantity
@@ -102,6 +116,12 @@
                 const result = await response.json();
                 if (result.success) {
                     alert('Product sold successfully!');
+                    // Update stock data on the frontend
+                    for (const article of updatedArticles) {
+                        articleStock[article.art_id].stock -= article.amount_of;
+                        const stockSpan = document.getElementById(`article-${article.art_id}`).querySelector('.article-stock');
+                        stockSpan.textContent = `Stock: ${articleStock[article.art_id].stock}`;
+                    }
                 } else {
                     document.getElementById('error-message').textContent = result.message || 'Error selling product';
                 }

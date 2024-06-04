@@ -1,13 +1,30 @@
-/* public/css/styles.css */
+/* Define color variables */
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #333;
+    --border-color: #ddd;
+    --border-hover-color: #c9c4c4;
+    --tab-bg-color: #f1f1f1;
+    --tab-bg-hover-color: #ddd;
+    --tab-bg-active-color: #c9c4c4;
+    --button-bg-color: #007bff;
+    --button-hover-bg-color: #0056b3;
+    --button-text-color: #fff;
+    --upload-button-bg-color: #28a745;
+    --upload-button-hover-bg-color: #218838;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
     margin: 0;
     padding: 20px;
 }
 
 h1 {
-    color: #333;
+    color: var(--text-color);
     text-align: center;
 }
 
@@ -18,8 +35,8 @@ h1 {
 }
 
 .tablinks {
-    background-color: #f1f1f1;
-    border: 1px solid #c9c4c4;
+    background-color: var(--tab-bg-color);
+    border: 1px solid var(--border-hover-color);
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
@@ -29,11 +46,11 @@ h1 {
 }
 
 .tablinks:hover {
-    background-color: #ddd;
+    background-color: var(--tab-bg-hover-color);
 }
 
 .tablinks.active {
-    background-color: #c9c4c4;
+    background-color: var(--tab-bg-active-color);
 }
 
 .tabcontent {
@@ -50,10 +67,10 @@ h1 {
 
 .product {
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
     width: calc(33% - 80px); 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--shadow-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,19 +81,20 @@ h1 {
 .product img {
     width: 200px;
     height: 200px;
+    border-radius: 5px; /* Rounded corners for product images */
 }
 
 .product a {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     text-decoration: none;
     border-radius: 3px;
 }
 
 .product a:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg-color);
 }
 
 /* Styles for Upload Section */
@@ -89,9 +107,9 @@ h1 {
 
 #Upload section {
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--shadow-color);
     padding: 20px;
     width: 80%;
     max-width: 600px;
@@ -99,7 +117,7 @@ h1 {
 
 #Upload section h3 {
     margin-top: 0;
-    color: #333;
+    color: var(--text-color);
 }
 
 #Upload form {
@@ -111,7 +129,7 @@ h1 {
 #Upload label {
     margin-bottom: 5px;
     font-weight: bold;
-    color: #333;
+    color: var(--text-color);
 }
 
 #Upload input[type="file"] {
@@ -123,16 +141,16 @@ h1 {
 
 #Upload button {
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: var(--upload-button-bg-color);
     border: none;
-    color: #fff;
+    color: var(--button-text-color);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 #Upload button:hover {
-    background-color: #218838;
+    background-color: var(--upload-button-hover-bg-color);
 }
 
 .upload-name {
