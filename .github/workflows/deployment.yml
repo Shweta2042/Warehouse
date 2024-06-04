@@ -24,10 +24,10 @@ jobs:
 
     - run: |
         docker build . --build-arg URI=$URI --build-arg DB_NAME=$DB_NAME --build-arg productCollectionName=$productCollectionName --build-arg inventoryCollectionName=$inventoryCollectionName -t warehouseregistryshweta.azurecr.io/warehouse:latest
-        docker push warehouseregistryshweta.azurecr.io/warehouse:latest
+        docker push warehouseinventory.azurecr.io/warehouse:latest
 
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'warehousewebbapp'
         publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-        images: 'warehouseregistryshweta.azurecr.io/warehouse:latest'
+        images: 'warehouseinventory.azurecr.io/warehouse:latest'
