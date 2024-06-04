@@ -28,6 +28,6 @@ jobs:
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'warehousewebbapp'
-        publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+        app-name: 'warehousewebapp'
+        publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE }}
         images: 'warehouseinventory.azurecr.io/warehouse:latest'
