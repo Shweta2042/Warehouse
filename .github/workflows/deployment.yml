@@ -23,7 +23,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . --build-arg URI=$URI DB_NAME=$DB_NAME productCollectionName=$productCollectionName inventoryCollectionName=$inventoryCollectionName -t warehouseregistryshweta.azurecr.io/warehouse:latest
+        docker build . --build-arg URI=$URI --build-arg DB_NAME=$DB_NAME --build-arg productCollectionName=$productCollectionName --build-arg inventoryCollectionName=$inventoryCollectionName -t warehouseregistryshweta.azurecr.io/warehouse:latest
         docker push warehouseregistryshweta.azurecr.io/warehouse:latest
 
     - uses: azure/webapps-deploy@v2
