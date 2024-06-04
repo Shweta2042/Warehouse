@@ -1,6 +1,7 @@
 # Use Node.js 18
 FROM node:18.17.0
 
+ENV ENV=${ENV}
 # Create app directory
 WORKDIR /usr/src/app
 
