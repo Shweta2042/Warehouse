@@ -6,10 +6,10 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env: 
-     URI: ${{ secrets.URI }}
-     DB_NAME: ${{ secrets.DB_NAME }}
-     INVENTORYCOLLECTIONNAME: ${{ secrets.INVENTORYCOLLECTIONNAME }}
-     PRODUCTCOLLECTIONNAME: ${{ secrets.PRODUCTCOLLECTIONNAME }}
+     URI: ${{ vars.URI }}
+     DB_NAME: ${{ vars.DB_NAME }}
+     INVENTORYCOLLECTIONNAME: ${{ vars.INVENTORYCOLLECTIONNAME }}
+     PRODUCTCOLLECTIONNAME: ${{ vars.PRODUCTCOLLECTIONNAME }}
 
     steps:
     # checkout the repo
